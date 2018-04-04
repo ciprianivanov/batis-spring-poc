@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="postgres" targetRuntime="MyBatis3Simple">
+
+        <!-- TODO: Investigate if it is possible to load these from Spring context-->
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/postgres"
+                        userId="postgres"
+                        password="password">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="batis.spring.poc.domain.model.generated" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="immutable" value="true"/>
+        </javaModelGenerator>
+
+        <javaClientGenerator type="ANNOTATEDMAPPER" targetPackage="batis.spring.poc.mapper.generated"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="employees" domainObjectName="Employee"/>
+        <table tableName="users" domainObjectName="User"/>
+
+    </context>
+</generatorConfiguration>

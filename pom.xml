@@ -12,6 +12,8 @@
         <my-batis-version>3.4.6</my-batis-version>
         <my-batis-spring-version>1.3.2</my-batis-spring-version>
         <postgresql-version>42.2.2</postgresql-version>
+
+        <my-batis-generator-version>1.3.6</my-batis-generator-version>
     </properties>
 
     <build>
@@ -19,6 +21,35 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>${my-batis-generator-version}</version>
+                <configuration>
+                    <configurationFile>src/main/resources/batis-generator-config.xml</configurationFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>Generate MyBatis Artefacts</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <!--TODO: How to move this bullshit from here :)-->
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>${postgresql-version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.6</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
